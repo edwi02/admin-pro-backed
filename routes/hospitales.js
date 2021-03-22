@@ -22,14 +22,21 @@ router.post( '/',
         check('nombre').notEmpty().withMessage('El nombre es requerido'),
         validarCampos
     ],
-    addHospitales );
+    addHospitales 
+);
 
 router.put( '/:id' , 
-    [] ,
-    updHospitales);
+    [
+        validarJWT,
+        check('nombre').notEmpty().withMessage('El nombre es requerido'),
+        validarCampos
+    ] ,
+    updHospitales
+);
 
 router.delete( '/:id', 
     validarJWT,
-    delHospitales)
+    delHospitales
+);
 
 module.exports = router;

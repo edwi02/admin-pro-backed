@@ -18,18 +18,24 @@
  router.get( '/', validarJWT, getMedicos );
  
  router.post( '/', 
-     [
+    [
         validarJWT,
         check('nombre').notEmpty().withMessage('El nombre es requerido'),
         check('hospital').notEmpty().withMessage('El hospital es requerido')
                         .isMongoId().withMessage('El hospital id debe ser válido'),
         validarCampos
-     ],
-     addMedico );
+    ],
+    addMedico );
  
- router.put( '/:id' , 
-     [] ,
-     updMedico);
+ router.put( '/:id' ,
+    [ 
+         validarJWT,
+         check('nombre').notEmpty().withMessage('El nombre es requerido'),
+         check('hospital').notEmpty().withMessage('El hospital es requerido')
+                        .isMongoId().withMessage('El hospital id debe ser válido'),
+        validarCampos
+    ],
+    updMedico);
  
  router.delete( '/:id', 
      validarJWT,

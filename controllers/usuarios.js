@@ -92,7 +92,7 @@ const updUsuario = async(req, res = response) => {
             });
         }
 
-        // Actualziar
+        // Actualizar
         const { password, google, email, ... campos} = req.body;
 
         if ( usuarioDB.email !== email ) {
