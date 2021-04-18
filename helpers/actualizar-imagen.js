@@ -9,6 +9,7 @@ const borrarImagen = ( path ) => {
     
     if (fs.existsSync(path) ) {
         // Borrar la imagen anterior
+        console.log('Path encontrado:', path);
         fs.unlinkSync( path );
     }
 }
@@ -25,8 +26,10 @@ const actualizarImagen = async( tipo, id, nombreArchivo ) => {
                 return false;
             }
 
-            pathViejo = `./uploads/medicos/${ medico.img }`;
-            borrarImagen( pathViejo );
+            if ( medico.img ) {
+                pathViejo = `./uploads/medicos/${ medico.img }`;
+                borrarImagen( pathViejo );
+            }
 
             medico.img = nombreArchivo;
             await medico.save();
@@ -40,8 +43,10 @@ const actualizarImagen = async( tipo, id, nombreArchivo ) => {
                 return false;
             }
 
-            pathViejo = `./uploads/hospitales/${ hospital.img }`;
-            borrarImagen( pathViejo );
+            if( hospital.img ) {
+                pathViejo = `./uploads/hospitales/${ hospital.img }`;
+                borrarImagen( pathViejo );
+            }
 
             hospital.img = nombreArchivo;
             await hospital.save();
@@ -55,11 +60,14 @@ const actualizarImagen = async( tipo, id, nombreArchivo ) => {
                 return false;
             }
 
-            pathViejo = `./uploads/usuarios/${ usuario.img }`;
-            borrarImagen( pathViejo );
+            if ( usuario.img ) {
+                pathViejo = `./uploads/usuarios/${ usuario.img }`;
+                borrarImagen( pathViejo );
+            }
 
             usuario.img = nombreArchivo;
             await usuario.save();
+            console.log('Actualizó la imagen del usuario');
             return true;
         break;
     }

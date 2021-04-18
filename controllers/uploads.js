@@ -61,7 +61,7 @@ const fileUpload = ( req, res = response)=> {
                 });
             }
 
-            // ACtualizar base de datos
+            // Actualizar base de datos
             actualizarImagen(tipo, id,  nombreArchivo);
     
             res.json({
@@ -92,10 +92,12 @@ const retonarImagen = ( req, res = response) => {
 
         // Imagen por defecto
         if ( fs.existsSync(pathImg) ) {
+            console.log('Existe la imagen!!');
             res.sendFile( pathImg );
         } else {
+            console.log('Imagen no encontrada');
             const pathImg = path.join( __dirname, `../uploads/not-available.jpg` );    
-            res.sendFile(pathImg);
+            res.sendFile( pathImg );
         }
 
         
@@ -103,7 +105,7 @@ const retonarImagen = ( req, res = response) => {
         console.log(error);
         return res.status(500).json({
             ok: false, 
-            msg: 'Retornar Imagen. Informar al adminsitrador'
+            msg: 'Retornar Imagen. Informar al administrador'
         })
     }
 
